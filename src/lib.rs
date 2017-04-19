@@ -1,10 +1,10 @@
 extern crate gmp;
 extern crate num;
 
-use std::ops::{AddAssign, Sub, Div, Mul};
+use std::ops::{AddAssign, SubAssign, MulAssign};
 use gmp::mpq::Mpq;
 use gmp::mpz::Mpz;
-use num::One;
+use num::{Zero, One};
 
 /// The even-index Bernoulli numbers ([A000367](https://oeis.org/A000367) /
 /// [A002445](https://oeis.org/A002445)).
@@ -108,4 +108,30 @@ impl<T: Clone + One + AddAssign> Iterator for EulerUpDown<T> {
         self.sink.push(accum);
         Some(item)
     }
+}
+
+/// Calculates the factorial.
+///
+///     use bernoulli_numbers::factorial;
+///
+///     assert_eq!(factorial(0), 1);
+///     assert_eq!(factorial(1), 1);
+///     assert_eq!(factorial(2), 2);
+///     assert_eq!(factorial(3), 6);
+///     assert_eq!(factorial(4), 24);
+///     assert_eq!(factorial(5), 120);
+///     assert_eq!(factorial(6), 720);
+///     assert_eq!(factorial(7), 5040);
+///
+pub fn factorial<T>(mut n: T) -> T
+    where T: Clone + Ord + Zero + One + SubAssign<T> + MulAssign<T>
+{
+    assert!(n >= Zero::zero());
+    let one = One::one();
+    let mut r = One::one();
+    while n > one {
+        r *= n.clone();
+        n -= one.clone();
+    }
+    r
 }
