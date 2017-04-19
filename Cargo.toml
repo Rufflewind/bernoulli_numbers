@@ -1,0 +1,16 @@
+[package]
+name = "bernoulli_numbers"
+version = "0.1.0"
+authors = ["Phil Ruffwind <rf@rufflewind.com>"]
+description = "Bernoulli numbers"
+documentation = "https://docs.rs/bernoulli_numbers"
+repository = "https://github.com/Rufflewind/bernoulli_numbers"
+readme = "README.md"
+keywords = ["Bernoulli", "down", "Euler", "math", "number", "sequence", "up", "zigzag"]
+categories = ["science"]
+license = "MIT/Apache-2.0"
+exclude = [".gitignore"]
+
+[dependencies]
+num = "0.1.37"
+rust-gmp = "0.4.0"
